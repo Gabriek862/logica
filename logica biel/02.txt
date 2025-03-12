@@ -1,0 +1,83 @@
+Entendido! Vou criar um script de configuração para Mikrotik que bloqueie o acesso a jogos, vídeos, pornografia e redes sociais, garantindo um ambiente mais adequado para estudos. Vou explicar cada passo para que você compreenda o processo e possa ajustá-lo conforme necessário. Segue o guia:
+
+---
+
+### 1. Configuração Básica
+A porta Ethernet1 será configurada como WAN (obtenção de IP dinâmico) e a Ethernet2 será a LAN (endereçada como 10.0.0.1). Primeiro, configure o básico:
+
+/ip address
+add address=10.0.0.1/24 interface=ether2 comment="LAN"
+
+/ip dhcp-client
+add interface=ether1 comment="WAN"
+
+Isso configura o Mikrotik para funcionar com um IP dinâmico na WAN e define o endereço IP local na LAN.
+
+---
+
+### 2. Configuração de NAT
+Ative a funcionalidade de NAT para permitir que os dispositivos conectados à LAN acessem a internet:
+
+/ip firewall nat
+add chain=srcnat out-interface=ether1 action=masquerade comment="NAT para internet"
+
+---
+
+### 3. Criação de Regras de Bloqueio
+Agora vamos bloquear conteúdos indesejados, como jogos, pornografia, vídeos e redes sociais. Para isso, usaremos "Layer 7 Protocols" para identificar esses conteúdos:
+
+- Passo 1: Bloqueie Jogos, Pornografia, e Redes Sociais
+  Crie filtros no Layer 7 para identificar e bloquear domínios indesejados.
+
+/ip firewall layer7-protocol
+add name="block_games" regexp="^(.*\\.(steam|epicgames|roblox|riotgames|fortnite|playstation)\\.com).*\$"
+add name="block_porn" regexp="^(.*\\.(pornhub|xvideos|redtube|xnxx)\\.com).*\$"
+add name="block_social" regexp="^(.*\\.(facebook|instagram|tiktok|twitter|snapchat)\\.com).*\$"
+
+- Passo 2: Bloqueio de Streaming e Vídeos
+  Inclua as plataformas de vídeos na lista:
+
+/ip firewall layer7-protocol
+add name="block_streaming" regexp="^(.*\\.(youtube|netflix|primevideo|twitch|vimeo)\\.com).*\$"
+
+- Passo 3: Regras de Firewall
+  Adicione as regras para filtrar os pacotes:
+
+/ip firewall filter
+add chain=forward protocol=tcp layer7-protocol=block_games action=drop comment="Bloqueia Jogos"
+add chain=forward protocol=tcp layer7-protocol=block_porn action=drop comment="Bloqueia Pornografia"
+add chain=forward protocol=tcp layer7-protocol=block_social action=drop comment="Bloqueia Redes Sociais"
+add chain=forward protocol=tcp layer7-protocol=block_streaming action=drop comment="Bloqueia Streaming e Vídeos"
+
+---
+
+### 4. Configuração de DHCP
+Configure o serviço DHCP para a rede local, assim os dispositivos conectados recebem automaticamente endereços IP:
+
+/ip pool
+add name=dhcp_pool ranges=10.0.0.2-10.0.0.254
+
+/ip dhcp-server
+add address-pool=dhcp_pool interface=ether2 name=dhcp1
+
+/ip dhcp-server network
+add address=10.0.0.0/24 gateway=10.0.0.1 dns-server=10.0.0.1
+
+/ip dhcp-server enable dhcp1
+
+---
+
+### 5. Configuração de DNS
+Para impedir que os alunos burlem as restrições, configure o DNS para resolver consultas e aplicar um filtro adicional:
+
+/ip dns
+set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4
+
+/ip firewall filter
+add chain=forward protocol=udp port=53 action=drop comment="Bloqueia DNS externo para evitar bypass"
+
+---
+
+Com isso, seu roteador Mikrotik estará configurado para bloquear jogos, vídeos, pornografia e redes sociais enquanto fornece acesso à internet para fins educacionais.
+
+Se precisar de mais ajuda ou ajustes, estou à disposição! 😊

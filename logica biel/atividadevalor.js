@@ -1,0 +1,9 @@
+let n1 = 10
+let n2 = 30
+console.log("saida\nsoma =",n1+n2  )
+let n11 = -30
+let n22 = 10
+console.log("saida\nsoma =",n11+n22  )
+let n111 = 0
+let n222 = 0
+console.log("saida\nsoma =",n111+n222  )
