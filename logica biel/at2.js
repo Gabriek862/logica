@@ -1,13 +1,13 @@
-let a = 5
-let b = 6
-let c = 7
-let d = 8
-let dif = a*b-c*d
-console.log("Diferença", dif)
+var prompt = require('prompt-sync')();
+let horas =  parseInt(prompt("digite as horas"))
 
-let a2 = 5
-let b2 = 6
-let c2 = -7
-let d2 = 8
-let dif2 = a2*b2-c2*d2
-console.log("Diferença", dif2)
+if(horas>=5 && horas<=11){
+    console.log("am ");
+}
+else if (horas>=12 && horas<=23){
+    console.log("pm");
+}
+else{
+    console.log("madrugada");
+}
+console.log(horas)
