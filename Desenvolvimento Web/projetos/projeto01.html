@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft - Jogos e Comunidade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e1e1e; /* Fundo escuro similar ao site do Minecraft */
+            color: #ffffff; /* Texto branco */
+        }
+        .minecraft-button {
+            background-color: #50a050; /* Verde Minecraft */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px; /* Cantos arredondados */
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none; /* Remover sublinhado para links */
+            display: inline-block; /* Permitir padding e margin */
+        }
+        .minecraft-button:hover {
+            background-color: #408040; /* Verde mais escuro no hover */
+        }
+        .card {
+            background-color: #2a2a2a; /* Fundo do card mais claro */
+            border-radius: 12px; /* Cantos mais arredondados para os cards */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra suave */
+        }
+        .card img {
+            border-radius: 8px;
+            margin-bottom: 15px;
+            width: 100%; /* Imagem responsiva */
+            height: 180px; /* Altura fixa para consistência */
+            object-fit: cover; /* Cobrir a área sem distorcer */
+        }
+        .cart-icon {
+            /* Estilo básico para o ícone do carrinho */
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+        .category-button {
+            background-color: #3a3a3a; /* Cinza escuro */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .category-button:hover {
+            background-color: #5a5a5a; /* Cinza mais claro no hover */
+        }
+        .category-button.active {
+            background-color: #50a050; /* Verde Minecraft quando ativo */
+        }
+        .server-item {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-zinc-800 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-green-500">Minecraft Jogos & Comunidade</h1>
+            <div class="flex items-center">
+                <svg class="cart-icon" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 18a2 2 0 0 0 2-2 2 2 0 0 0-2-2H7a2 2 0 0 0-2 2 2 2 0 0 0 2 2h10m-1.5-6.5a.5.5 0 0 0-.5-.5H9a.5.5 0 0 0-.5.5v.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-.5zM12 2a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V4a2 2 0 0 1 2-2zM7 10h10l1 9H6l1-9z"/></svg>
+                <span id="cart-count" class="text-white font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8 p-4 flex-grow">
+
+        <section id="games" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Explore Nossos Jogos</h2>
+
+            <div class="flex justify-center mb-6">
+                <button class="category-button active" data-category="all">Todos</button>
+                <button class="category-button" data-category="main">Principal</button>
+                <button class="category-button" data-category="adventure">Aventura</button>
+                <button class="category-button" data-category="strategy">Estratégia</button>
+            </div>
+
+            <div id="game-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card" data-game-id="minecraft" data-game-name="Minecraft" data-game-price="29.99" data-category="main">
+                    <img src="https://placehold.co/300x180/50a050/ffffff?text=Minecraft" alt="Imagem do Minecraft">
+                    <h3 class="text-xl font-bold mb-2">Minecraft</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Construa, explore e sobreviva em um mundo de blocos ilimitado. A aventura é sua para criar.</p>
+                    <span class="text-green-400 text-lg font-semibold mb-4">R$ 29,99</span>
+                    <button class="minecraft-button add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="card" data-game-id="dungeons" data-game-name="Minecraft Dungeons" data-game-price="19.99" data-category="adventure">
+                    <img src="https://placehold.co/300x180/a05050/ffffff?text=Minecraft+Dungeons" alt="Imagem do Minecraft Dungeons">
+                    <h3 class="text-xl font-bold mb-2">Minecraft Dungeons</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Um jogo de aventura e ação inspirado em clássicos dungeon crawlers, ambientado no universo Minecraft.</p>
+                    <span class="text-green-400 text-lg font-semibold mb-4">R$ 19,99</span>
+                    <button class="minecraft-button add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="card" data-game-id="legends" data-game-name="Minecraft Legends" data-game-price="24.99" data-category="strategy">
+                    <img src="https://placehold.co/300x180/5050a0/ffffff?text=Minecraft+Legends" alt="Imagem do Minecraft Legends">
+                    <h3 class="text-xl font-bold mb-2">Minecraft Legends</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Lidere seus aliados em batalhas épicas para defender o Overworld de uma invasão Piglin.</p>
+                    <span class="text-green-400 text-lg font-semibold mb-4">R$ 24,99</span>
+                    <button class="minecraft-button add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                 <div class="card" data-game-id="education" data-game-name="Minecraft Education" data-game-price="0.00" data-category="main">
+                    <img src="https://placehold.co/300x180/50a0a0/ffffff?text=Minecraft+Education" alt="Imagem do Minecraft Education">
+                    <h3 class="text-xl font-bold mb-2">Minecraft Education</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Uma versão baseada em blocos para aprendizado e ensino, com recursos especiais para educadores.</p>
+                    <span class="text-green-400 text-lg font-semibold mb-4">Grátis</span>
+                    <button class="minecraft-button add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="card" data-game-id="storymode" data-game-name="Minecraft Story Mode" data-game-price="14.99" data-category="adventure">
+                    <img src="https://placehold.co/300x180/a0a050/ffffff?text=Minecraft+Story+Mode" alt="Imagem do Minecraft Story Mode">
+                    <h3 class="text-xl font-bold mb-2">Minecraft Story Mode</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Uma aventura narrativa episódica no mundo de Minecraft, onde suas escolhas moldam a história.</p>
+                    <span class="text-green-400 text-lg font-semibold mb-4">R$ 14,99</span>
+                    <button class="minecraft-button add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-gray-700 my-12"> <section id="servers" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Lista de Servidores Populares</h2>
+            <div id="server-list">
+                <div class="server-item">
+                    <div>
+                        <h4 class="text-lg font-semibold">Hypixel</h4>
+                        <p class="text-gray-400 text-sm">Maior servidor de minigames do mundo!</p>
+                    </div>
+                    <span class="text-green-400">Online</span>
+                </div>
+                 <div class="server-item">
+                    <div>
+                        <h4 class="text-lg font-semibold">Origin Realms</h4>
+                        <p class="text-gray-400 text-sm">Servidor de sobrevivência com customizações únicas.</p>
+                    </div>
+                    <span class="text-green-400">Online</span>
+                </div>
+                 <div class="server-item">
+                    <div>
+                        <h4 class="text-lg font-semibold">Minez</h4>
+                        <p class="text-gray-400 text-sm">Sobreviva em um mundo infestado de zumbis.</p>
+                    </div>
+                    <span class="text-red-400">Offline</span>
+                </div>
+                </div>
+        </section>
+
+        <hr class="border-gray-700 my-12"> <section id="trade" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Compre e Venda Itens</h2>
+            <div class="bg-zinc-700 p-6 rounded-lg text-center">
+                <p class="text-gray-300 mb-4">Esta é uma área simulada para compra e venda de itens do jogo. A funcionalidade real requer um sistema de backend.</p>
+                <a href="#" class="minecraft-button">Explorar Mercado</a>
+                <a href="https://www.minecraft.net/" class="minecraft-button ml-4" target="_blank">Vender Itens</a>
+            </div>
+        </section>
+
+         <hr class="border-gray-700 my-12"> <section id="support" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Suporte</h2>
+            <div class="bg-zinc-700 p-6 rounded-lg">
+                <p class="text-gray-300 mb-4">Precisa de ajuda? Encontre respostas para suas perguntas comuns ou entre em contato com nossa equipe de suporte.</p>
+                <ul class="list-disc list-inside text-gray-400 mb-4">
+                    <li><a href="#" class="text-green-400 hover:underline">FAQ - Perguntas Frequentes</a></li>
+                    <li><a href="#" class="text-green-400 hover:underline">Enviar um Ticket de Suporte</a></li>
+                    <li><a href="#" class="text-green-400 hover:underline">Status do Servidor</a></li>
+                </ul>
+                <p class="text-gray-400 text-sm">Nosso objetivo é garantir que você tenha a melhor experiência possível.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-zinc-800 p-4 mt-8 text-center text-gray-400">
+        <p>&copy; 2023 Seu Site de Jogos. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Script para o carrinho simples
+        let cart = []; // Array para armazenar os itens do carrinho
+
+        const cartCountElement = document.getElementById('cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const gameCards = document.querySelectorAll('#game-list .card');
+
+        // Função para atualizar a contagem do carrinho na interface
+        function updateCartCount() {
+            cartCountElement.textContent = cart.length;
+        }
+
+        // Adiciona event listener para cada botão "Adicionar ao Carrinho"
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const card = event.target.closest('.card');
+                const gameId = card.dataset.gameId;
+                const gameName = card.dataset.gameName;
+                const gamePrice = parseFloat(card.dataset.gamePrice);
+
+                // Cria um objeto para o item do carrinho
+                const item = {
+                    id: gameId,
+                    name: gameName,
+                    price: gamePrice
+                };
+
+                // Adiciona o item ao array do carrinho
+                cart.push(item);
+
+                // Atualiza a contagem na interface
+                updateCartCount();
+
+                console.log(`"${gameName}" adicionado ao carrinho!`);
+                console.log("Carrinho atual:", cart);
+
+                // Opcional: desabilitar o botão ou mudar o texto após adicionar
+                // event.target.textContent = 'Adicionado!';
+                // event.target.disabled = true;
+            });
+        });
+
+        // Adiciona event listener para os botões de categoria
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const selectedCategory = event.target.dataset.category;
+
+                // Remove a classe 'active' de todos os botões de categoria
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Adiciona a classe 'active' ao botão clicado
+                event.target.classList.add('active');
+
+                // Filtra os cards de jogos
+                gameCards.forEach(card => {
+                    const gameCategory = card.dataset.category;
+                    if (selectedCategory === 'all' || gameCategory === selectedCategory) {
+                        card.style.display = 'flex'; // Mostra o card
+                    } else {
+                        card.style.display = 'none'; // Esconde o card
+                    }
+                });
+            });
+        });
+
+
+        // Inicializa a contagem do carrinho ao carregar a página
+        updateCartCount();
+
+    </script>
+
+</body>
+</html>
