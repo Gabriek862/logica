@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+}
+
+header{
+    
+    width: 100%;
+    h
+    padding: 8px 60px;
+    color: #fff;
+    background: #FA4119;
+    background: linear-gradient(186deg, rgba(250, 65, 25, 1) 31%, rgba(255, 100, 51, 1) 61%, rgba(244, 138, 52, 1) 100%, rgba(237, 221, 83, 1) 100%);
+}
+
+header a:hover{
+    color: rgb(197, 105, 105);
+}
+header a {
+   padding: 6px 6px; 
+}
+
+
+
+
+.div1{
+    display: flex;
+    justify-content: space-between;
+}
+.div1f{
+    display: flex;
+    align-items: center;
+
+}
+.div1f nav{
+    display: flex;
+    gap: 15px;
+}
+#link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#link a i {
+    font-size: 18px;
+    background-color: #fff;
+    border-radius: 4px;
+    color: #f8482f;
+
+}
+#link a .estilod{
+    background-color: #f8482f;
+    color: #fff;
+    font-size: 22px;
+}
+.div1f2{
+    display: flex;
+    align-items: center
+    gap:15px
+    
+}
+.div2{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left:-50px;
+}
+.inputs{
+    width: 800px;
+    height:40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #fff;
+    border-radius: 6px;
+
+}
+.inputs input{
+    width: 580px;
+    height: 40px;
+    border: none;
+    padding-left: 10px;
+    border-radius: 5px;
+
+}
