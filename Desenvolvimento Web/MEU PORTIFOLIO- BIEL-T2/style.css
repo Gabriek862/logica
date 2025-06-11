@@ -1,0 +1,36 @@
+*{
+     font-family: "Audiowide", sans-serif;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 0;
+    
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    background-color: black;~
+    
+}
+header img{
+    width: 30px;
+    
+
+
+    
+}
+nav{
+    background-color: black;
+    color: aliceblue;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    display: flex;
+}
+
+
+
+
+
+
