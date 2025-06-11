@@ -23,10 +23,15 @@ header img{
 nav{
     background-color: black;
     color: aliceblue;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     padding: 5px;
     display: flex;
+}
+.divb{
+    background-color: black;
+    color: aliceblue;
+    size: 50px;
 }
 
 
